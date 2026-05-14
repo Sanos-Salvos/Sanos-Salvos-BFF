@@ -2,17 +2,28 @@ package com.sanosysalvos.bff.client;
 
 import com.sanosysalvos.bff.dto.PetBffDTO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
-@FeignClient(name = "pet-client", url = "${microservicio.pet.url}")
+@FeignClient(name = "pet-service", url = "${microservicio.pet.url}")
 public interface PetClient {
-    @GetMapping("/lista/organizacion/{orgId}")
-    List<PetBffDTO> listarPorOrg(@PathVariable("orgId") Long orgId);
 
-    @PostMapping("/crear")
-    PetBffDTO registrarNuevaMascota(@RequestBody PetBffDTO nuevaMascota);
+    @GetMapping("/all") // Asegúrate que el micro Pet tenga esta ruta
+    List<PetBffDTO> obtenerTodas();
+
+    @GetMapping("/{id}")
+    PetBffDTO obtenerPorId(@PathVariable("id") Long id);
+
+    @PostMapping("/create")
+    PetBffDTO registrarNuevaMascota(@RequestBody PetBffDTO dto);
+
+    @PutMapping("/update/{id}")
+    PetBffDTO actualizarMascota(@PathVariable("id") Long id, @RequestBody PetBffDTO dto);
+
+    @DeleteMapping("/delete/{id}")
+    void eliminarMascota(@PathVariable("id") Long id);
+
+    @GetMapping("/organizacion/{orgId}")
+    List<PetBffDTO> listarPorOrg(@PathVariable("orgId") Long orgId);
 }
