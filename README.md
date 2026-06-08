@@ -1,36 +1,37 @@
-﻿# 🏥 Sanos-Salvos-BFF
+﻿# Sanos-Salvos-BFF
 
-Backend For Frontend - agrega datos de múltiples servicios
+Backend For Frontend - agrega y transforma datos de multiples microservicios para el frontend
 
 ## Puerto
-\\\
+
 8083
-\\\
 
 ## Base de datos
-\\\
+
 N/A
-\\\
 
-## Endpoints
-\\\
-/api/bff/auth, /api/bff/animales, /api/bff/organizaciones, /api/bff/coincidencias
-\\\
+## Endpoints disponibles
 
-## Ejecución
+POST /api/bff/auth/login
+POST /api/bff/auth/register
+GET /api/bff/auth/check
+GET /api/bff/animales/listar
+POST /api/bff/animales/nuevo
+GET /api/bff/organizaciones/listar
+GET /api/bff/coincidencias/listar
 
-### Docker
-\\\ash
+## Ejecucion con Docker
+
 docker-compose up --build
-\\\
 
-### Manual
-\\\ash
+## Ejecucion manual
+
 mvn spring-boot:run
-\\\
 
-## Stack
+## Tecnologias
+
 - Java 21
 - Spring Boot 3.2
+- Spring Security + JWT
 - PostgreSQL
 - Docker
