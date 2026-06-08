@@ -8,7 +8,7 @@ Backend For Frontend - agrega y transforma datos de multiples microservicios par
 
 ## Base de datos
 
-N/A
+Sin base de datos propia - agrega datos de Auth, Pet, Organizaciones, Coincidencias, Geolocalizacion, Notificaciones y Usuarios
 
 ## Endpoints disponibles
 
