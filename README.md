@@ -91,7 +91,7 @@ BffApplication.java
 ## Desde consola
 
 ```bash
-mvn spring-boot:run
+.\mvn spring-boot:run
 ```
 
 El servicio quedará disponible en:

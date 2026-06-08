@@ -22,8 +22,13 @@ public class AuthBffController {
         return ResponseEntity.ok(service.loginYAutenticar(request));
     }
 
-    @GetMapping("/validar-sesion")
-    public ResponseEntity<Boolean> chequearToken(@RequestHeader("Authorization") String token) {
-        return ResponseEntity.ok(service.validarFronteraToken(token));
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponseDTO> registrarUsuario(@RequestBody AuthRequestDTO request) {
+        return ResponseEntity.ok(service.registrarUsuario(request));
+    }
+
+    @GetMapping("/check")
+    public ResponseEntity<Boolean> chequearToken(@RequestHeader("Authorization") String authHeader) {
+        return ResponseEntity.ok(service.validarFronteraToken(authHeader));
     }
 }
