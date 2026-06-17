@@ -2,11 +2,22 @@ package com.sanosysalvos.bff.client;
 
 import com.sanosysalvos.bff.dto.GeolocalizacionBffDTO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "geolocalizacion-client", url = "${microservicio.geolocalizacion.url}")
+import java.util.List;
+
+@FeignClient(name = "sanos-salvos-geolocalizacion", url = "${microservicio.geolocalizacion.url}")
 public interface GeolocalizacionClient {
-    @GetMapping("/buscar")
-    GeolocalizacionBffDTO obtenerCoordenadas(@RequestParam("tipo") String tipo, @RequestParam("id") Long id);
+
+    @PostMapping("/api/geolocalizacion")
+    GeolocalizacionBffDTO registrar(@RequestBody GeolocalizacionBffDTO dto);
+
+    @GetMapping("/api/geolocalizacion")
+    List<GeolocalizacionBffDTO> listar();
+
+    @GetMapping("/api/geolocalizacion/{id}")
+    GeolocalizacionBffDTO obtenerPorId(@PathVariable("id") Long id);
+
+    @DeleteMapping("/api/geolocalizacion/{id}")
+    String eliminar(@PathVariable("id") Long id);
 }

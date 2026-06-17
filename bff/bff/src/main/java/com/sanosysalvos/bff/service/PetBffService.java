@@ -5,30 +5,35 @@ import com.sanosysalvos.bff.dto.PetBffDTO;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+import java.util.List;
+
 @Service
 public class PetBffService {
 
-    private final PetClient petClient;
+    private final PetClient client;
 
-    public PetBffService(PetClient petClient) {
-        this.petClient = petClient;
+    public PetBffService(PetClient client) {
+        this.client = client;
     }
 
-    public List<PetBffDTO> listarTodas() {
-        return petClient.obtenerTodas();
+    public PetBffDTO registrar(PetBffDTO dto) {
+        return client.registrar(dto);
     }
 
-    // ESTE ES EL MÉTODO QUE TE FALTABA PARA QUE NO DE ERROR
-    public List<PetBffDTO> listarPorOrg(Long orgId) {
-        return petClient.listarPorOrg(orgId);
+    public List<PetBffDTO> listar() {
+        return client.listar();
     }
 
-    public PetBffDTO obtenerDetalle(Long id) {
-        return petClient.obtenerPorId(id);
+    public PetBffDTO obtenerPorId(Long id) {
+        return client.obtenerPorId(id);
     }
 
-    public PetBffDTO registrarMascotaDesdeFront(PetBffDTO dto) {
-        return petClient.registrarNuevaMascota(dto);
+    public PetBffDTO actualizar(Long id, PetBffDTO dto) {
+        return client.actualizar(id, dto);
+    }
+
+    public String eliminar(Long id) {
+        return client.eliminar(id);
     }
 
     public PetBffDTO actualizarMascota(Long id, PetBffDTO dto) {

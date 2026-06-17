@@ -1,7 +1,6 @@
 package com.sanosysalvos.bff.config;
 
 import feign.RequestInterceptor;
-import feign.RequestTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -14,18 +13,15 @@ public class FeignClientConfig {
 
     @Bean
     public RequestInterceptor requestInterceptor() {
-        return new RequestInterceptor() {
-            @Override
-            public void apply(RequestTemplate template) {
-                ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        return template -> {
+            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 
-                if (attributes != null) {
-                    HttpServletRequest request = attributes.getRequest();
-                    String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+            if (attributes != null) {
+                HttpServletRequest request = attributes.getRequest();
+                String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-                    if (authorizationHeader != null) {
-                        template.header(HttpHeaders.AUTHORIZATION, authorizationHeader);
-                    }
+                if (authorizationHeader != null) {
+                    template.header(HttpHeaders.AUTHORIZATION, authorizationHeader);
                 }
             }
         };
