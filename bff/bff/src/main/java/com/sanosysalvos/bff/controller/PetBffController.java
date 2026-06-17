@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.CrossOrigin; // Asegúrate de que
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/bff/pet")
+@CrossOrigin(origins = "*")
 public class PetBffController {
 
     private final PetBffService petBffService;
@@ -45,8 +48,28 @@ public class PetBffController {
         return petBffService.actualizarMascota(id, dto);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable Long id) {
-        petBffService.borrarMascota(id);
+    @PostMapping
+    public ResponseEntity<PetBffDTO> registrar(@RequestBody PetBffDTO dto) {
+        return ResponseEntity.ok(service.registrar(dto));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PetBffDTO>> listar() {
+        return ResponseEntity.ok(service.listar());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PetBffDTO> obtenerPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(service.obtenerPorId(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PetBffDTO> actualizar(@PathVariable Long id, @RequestBody PetBffDTO dto) {
+        return ResponseEntity.ok(service.actualizar(id, dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable Long id) {
+        return ResponseEntity.ok(service.eliminar(id));
     }
 }

@@ -4,8 +4,7 @@ import lombok.Data;
 
 @Data
 public class AuthResponseDTO {
-    private String token;
-    private String tipoToken; // Bearer
+    private boolean autenticado;
     private String username;
     private String rol;
 }

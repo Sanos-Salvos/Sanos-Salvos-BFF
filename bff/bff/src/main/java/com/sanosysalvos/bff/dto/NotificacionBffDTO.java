@@ -1,13 +1,16 @@
 package com.sanosysalvos.bff.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class NotificacionBffDTO {
     private Long id;
-    private Long usuarioId;
-    private String titulo;
-    private String mensaje;
-    private String medio; // EMAIL, SMS, PUSH
-    private boolean leido;
+    private String message;
+    private String recipient;
+    private LocalDateTime timestamp;
 }
