@@ -1,7 +1,7 @@
 package com.sanosysalvos.bff.service;
 
 import com.sanosysalvos.bff.client.CoincidenciaClient;
-import com.sanosysalvos.bff.dto.CoincidenciaBffDTO;
+import com.sanosysalvos.bff.dto.CoincidenciasBffDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,15 +15,23 @@ public class CoincidenciaBffService {
         this.coincidenciaClient = coincidenciaClient;
     }
 
-    public List<CoincidenciaBffDTO> listarTodas() {
+    public CoincidenciasBffDTO crear(CoincidenciasBffDTO dto) {
+        return coincidenciaClient.crear(dto);
+    }
+
+    public List<CoincidenciasBffDTO> listarTodas() {
         return coincidenciaClient.listarTodas();
     }
 
-    public CoincidenciaBffDTO obtenerPorId(Long id) {
+    public CoincidenciasBffDTO obtenerPorId(Long id) {
         return coincidenciaClient.obtenerPorId(id);
     }
 
-    public CoincidenciaBffDTO actualizarEstado(Long id, String estado) {
+    public CoincidenciasBffDTO actualizarEstado(Long id, String estado) {
         return coincidenciaClient.actualizarEstado(id, estado);
+    }
+
+    public void eliminar(Long id) {
+        coincidenciaClient.eliminar(id);
     }
 }

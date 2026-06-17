@@ -9,29 +9,29 @@ import java.util.List;
 @Service
 public class OrganizacionBffService {
 
-    private final OrganizacionClient organizacionClient;
+    private final OrganizacionClient client;
 
-    public OrganizacionBffService(OrganizacionClient organizacionClient) {
-        this.organizacionClient = organizacionClient;
+    public OrganizacionBffService(OrganizacionClient client) {
+        this.client = client;
     }
 
-    public List<OrganizacionBffDTO> listarTodas() {
-        return organizacionClient.listarTodas();
+    public OrganizacionBffDTO registrar(OrganizacionBffDTO dto) {
+        return client.registrarOrganizacion(dto);
     }
 
-    public OrganizacionBffDTO buscarPorId(Long id) {
-        return organizacionClient.obtenerPorId(id);
+    public List<OrganizacionBffDTO> listar() {
+        return client.listarTodas();
     }
 
-    public OrganizacionBffDTO crear(OrganizacionBffDTO org) {
-        return organizacionClient.crear(org);
+    public OrganizacionBffDTO obtenerPorId(Long id) {
+        return client.buscarPorId(id);
     }
 
-    public OrganizacionBffDTO actualizar(Long id, OrganizacionBffDTO org) {
-        return organizacionClient.actualizar(id, org);
+    public OrganizacionBffDTO actualizar(Long id, OrganizacionBffDTO dto) {
+        return client.actualizarOrganizacion(id, dto);
     }
 
-    public void eliminar(Long id) {
-        organizacionClient.eliminar(id);
+    public String eliminar(Long id) {
+        return client.eliminarOrganizacion(id);
     }
 }

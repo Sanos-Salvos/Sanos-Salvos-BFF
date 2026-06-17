@@ -2,6 +2,7 @@ package com.sanosysalvos.bff.controller;
 
 import com.sanosysalvos.bff.dto.OrganizacionBffDTO;
 import com.sanosysalvos.bff.service.OrganizacionBffService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,29 +19,28 @@ public class OrganizacionBffController {
         this.service = service;
     }
 
-    @GetMapping("/listar")
+    @PostMapping
+    public ResponseEntity<OrganizacionBffDTO> registrarOrganizacion(@RequestBody OrganizacionBffDTO dto) {
+        return new ResponseEntity<>(service.registrar(dto), HttpStatus.CREATED);
+    }
+
+    @GetMapping
     public ResponseEntity<List<OrganizacionBffDTO>> listarTodas() {
-        return ResponseEntity.ok(service.listarTodas());
+        return ResponseEntity.ok(service.listar());
     }
 
-    @GetMapping("/buscar/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<OrganizacionBffDTO> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(service.buscarPorId(id));
+        return ResponseEntity.ok(service.obtenerPorId(id));
     }
 
-    @PostMapping("/crear")
-    public ResponseEntity<OrganizacionBffDTO> crear(@RequestBody OrganizacionBffDTO org) {
-        return ResponseEntity.ok(service.crear(org));
+    @PutMapping("/{id}")
+    public ResponseEntity<OrganizacionBffDTO> actualizarOrganizacion(@PathVariable Long id, @RequestBody OrganizacionBffDTO dto) {
+        return ResponseEntity.ok(service.actualizar(id, dto));
     }
 
-    @PutMapping("/actualizar/{id}")
-    public ResponseEntity<OrganizacionBffDTO> actualizar(@PathVariable Long id, @RequestBody OrganizacionBffDTO org) {
-        return ResponseEntity.ok(service.actualizar(id, org));
-    }
-
-    @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<String> eliminar(@PathVariable Long id) {
-        service.eliminar(id);
-        return ResponseEntity.ok("Organización eliminada correctamente");
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarOrganizacion(@PathVariable Long id) {
+        return ResponseEntity.ok(service.eliminar(id));
     }
 }

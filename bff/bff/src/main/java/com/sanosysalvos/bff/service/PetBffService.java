@@ -9,29 +9,29 @@ import java.util.List;
 @Service
 public class PetBffService {
 
-    private final PetClient petClient;
+    private final PetClient client;
 
-    public PetBffService(PetClient petClient) {
-        this.petClient = petClient;
+    public PetBffService(PetClient client) {
+        this.client = client;
     }
 
-    public PetBffDTO registrarMascotaDesdeFront(PetBffDTO dto) {
-        return petClient.registrarNuevaMascota(dto);
+    public PetBffDTO registrar(PetBffDTO dto) {
+        return client.registrar(dto);
     }
 
-    public List<PetBffDTO> listarTodas() {
-        return petClient.listarTodas();
+    public List<PetBffDTO> listar() {
+        return client.listar();
     }
 
-    public PetBffDTO buscarPorId(Long id) {
-        return petClient.buscarPorId(id);
+    public PetBffDTO obtenerPorId(Long id) {
+        return client.obtenerPorId(id);
     }
 
     public PetBffDTO actualizar(Long id, PetBffDTO dto) {
-        return petClient.actualizar(id, dto);
+        return client.actualizar(id, dto);
     }
 
-    public void eliminar(Long id) {
-        petClient.eliminar(id);
+    public String eliminar(Long id) {
+        return client.eliminar(id);
     }
 }

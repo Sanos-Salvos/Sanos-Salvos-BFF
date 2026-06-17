@@ -1,22 +1,25 @@
 package com.sanosysalvos.bff.client;
 
-import com.sanosysalvos.bff.dto.CoincidenciaBffDTO;
+import com.sanosysalvos.bff.dto.CoincidenciasBffDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@FeignClient(name = "coincidencias-client", url = "${microservicio.coincidencias.url}")
+@FeignClient(name = "sanos-salvos-coincidencias", url = "${microservicio.coincidencias.url}")
 public interface CoincidenciaClient {
 
+    @PostMapping("/api/coincidencias")
+    CoincidenciasBffDTO crear(@RequestBody CoincidenciasBffDTO dto);
+
     @GetMapping("/api/coincidencias")
-    List<CoincidenciaBffDTO> listarTodas();
+    List<CoincidenciasBffDTO> listarTodas();
 
     @GetMapping("/api/coincidencias/{id}")
-    CoincidenciaBffDTO obtenerPorId(@PathVariable("id") Long id);
-
-    @GetMapping("/api/coincidencias")
-    List<CoincidenciaBffDTO> obtenerCoincidencias(@RequestParam("organizacionId") Long organizacionId);
+    CoincidenciasBffDTO obtenerPorId(@PathVariable("id") Long id);
 
     @PutMapping("/api/coincidencias/{id}/estado")
-    CoincidenciaBffDTO actualizarEstado(@PathVariable("id") Long id, @RequestParam("estado") String estado);
+    CoincidenciasBffDTO actualizarEstado(@PathVariable("id") Long id, @RequestParam("estado") String estado);
+
+    @DeleteMapping("/api/coincidencias/{id}")
+    void eliminar(@PathVariable("id") Long id);
 }

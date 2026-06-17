@@ -6,21 +6,21 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "organizaciones-client", url = "${microservicio.organizaciones.url}")
+@FeignClient(name = "sanos-salvos-organizaciones", url = "${microservicio.organizaciones.url}")
 public interface OrganizacionClient {
 
-    @GetMapping("/buscar/{id}")
-    OrganizacionBffDTO obtenerPorId(@PathVariable("id") Long id);
+    @PostMapping("/api/organizaciones")
+    OrganizacionBffDTO registrarOrganizacion(@RequestBody OrganizacionBffDTO dto);
 
-    @GetMapping("/listar")
+    @GetMapping("/api/organizaciones")
     List<OrganizacionBffDTO> listarTodas();
 
-    @PostMapping("/crear")
-    OrganizacionBffDTO crear(@RequestBody OrganizacionBffDTO org);
+    @GetMapping("/api/organizaciones/{id}")
+    OrganizacionBffDTO buscarPorId(@PathVariable("id") Long id);
 
-    @PutMapping("/actualizar/{id}")
-    OrganizacionBffDTO actualizar(@PathVariable("id") Long id, @RequestBody OrganizacionBffDTO org);
+    @PutMapping("/api/organizaciones/{id}")
+    OrganizacionBffDTO actualizarOrganizacion(@PathVariable("id") Long id, @RequestBody OrganizacionBffDTO dto);
 
-    @DeleteMapping("/eliminar/{id}")
-    void eliminar(@PathVariable("id") Long id);
+    @DeleteMapping("/api/organizaciones/{id}")
+    String eliminarOrganizacion(@PathVariable("id") Long id);
 }

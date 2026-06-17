@@ -1,41 +1,36 @@
 package com.sanosysalvos.bff.controller;
 
-import com.sanosysalvos.bff.dto.PetBffDTO;
-import com.sanosysalvos.bff.service.PetBffService;
+import com.sanosysalvos.bff.dto.GeolocalizacionBffDTO;
+import com.sanosysalvos.bff.service.GeolocalizacionBffService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/bff/pet")
+@RequestMapping("/api/bff/geolocalizacion")
 @CrossOrigin(origins = "*")
-public class PetBffController {
+public class GeolocalizacionBffController {
 
-    private final PetBffService service;
+    private final GeolocalizacionBffService service;
 
-    public PetBffController(PetBffService service) {
+    public GeolocalizacionBffController(GeolocalizacionBffService service) {
         this.service = service;
     }
 
     @PostMapping
-    public ResponseEntity<PetBffDTO> registrar(@RequestBody PetBffDTO dto) {
+    public ResponseEntity<GeolocalizacionBffDTO> registrar(@RequestBody GeolocalizacionBffDTO dto) {
         return ResponseEntity.ok(service.registrar(dto));
     }
 
     @GetMapping
-    public ResponseEntity<List<PetBffDTO>> listar() {
+    public ResponseEntity<List<GeolocalizacionBffDTO>> listar() {
         return ResponseEntity.ok(service.listar());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PetBffDTO> obtenerPorId(@PathVariable Long id) {
+    public ResponseEntity<GeolocalizacionBffDTO> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(service.obtenerPorId(id));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<PetBffDTO> actualizar(@PathVariable Long id, @RequestBody PetBffDTO dto) {
-        return ResponseEntity.ok(service.actualizar(id, dto));
     }
 
     @DeleteMapping("/{id}")

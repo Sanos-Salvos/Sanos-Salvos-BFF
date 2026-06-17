@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class GeolocalizacionBffDTO {
     private Long id;
-    private String tipoEntidad; // USUARIO, ORGANIZACION, PET
-    private Long entidadId;
+    private Long mascotaId;
+    private String direccion;
+    private String ciudad;
     private Double latitud;
     private Double longitud;
-    private String direccionAproximada;
 }

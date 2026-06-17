@@ -6,18 +6,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/bff/main")
-@CrossOrigin(origins = "*")
+@RequestMapping("/api/dashboard")
 public class DashboardBffController {
 
-    private final DashboardBffService service;
-
-    public DashboardBffController(DashboardBffService service) {
-        this.service = service;
+    private final DashboardBffService dashboardBffService;
+    public DashboardBffController(DashboardBffService dashboardBffService) {
+        this.dashboardBffService = dashboardBffService;
     }
 
-    @GetMapping("/dashboard")
-    public ResponseEntity<DashboardResumenDTO> verPantallaCompleta(@RequestParam Long usuarioId, @RequestParam Long organizacionId) {
-        return ResponseEntity.ok(service.construirDashboardCompleto(usuarioId, organizacionId));
+    @GetMapping
+    public ResponseEntity<DashboardResumenDTO> getDashboard(
+            @RequestParam(value = "usuarioId", required = false) Long usuarioId,
+            @RequestParam(value = "organizacionId", required = false) Long organizacionId) {
+
+        DashboardResumenDTO dashboard = dashboardBffService.construirDashboardCompleto(usuarioId, organizacionId);
+
+        return ResponseEntity.ok(dashboard);
     }
 }
