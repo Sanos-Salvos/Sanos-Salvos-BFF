@@ -5,8 +5,6 @@ import com.sanosysalvos.bff.dto.PetBffDTO;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
-import java.util.List;
-
 @Service
 public class PetBffService {
 
@@ -34,13 +32,5 @@ public class PetBffService {
 
     public String eliminar(Long id) {
         return client.eliminar(id);
-    }
-
-    public PetBffDTO actualizarMascota(Long id, PetBffDTO dto) {
-        return petClient.actualizarMascota(id, dto);
-    }
-
-    public void borrarMascota(Long id) {
-        petClient.eliminarMascota(id);
     }
 }
